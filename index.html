@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fixed Menu</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+        }
+        #header{
+            position: fixed;
+            top:0;
+            width:100%;
+            height:80px;
+            overflow: hidden;
+            background-color: #222222;
+            padding: 20px;
+            transition: all .3s ease-in-out;
+        }
+        .left{
+            float: left;
+            width:49%;
+        }
+        .right{
+            float: right;
+            width:49%;
+        }
+        #header img{
+            width:100%;
+            max-width: 250px;
+            height:auto;
+            transition: all .3s ease-in-out;
+
+        }
+        #header ul{
+            position: relative;
+            list-style: none;
+            transition: all .3s ease-in-out;
+        }
+        #header ul li{
+            display: inline-block;
+        }
+        #header ul li a:link,#header ul li a:visited{
+            display: inline-block;
+            width:100px;
+            padding: 10px 20px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 17px;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            transition: all .3s ease-in-out;
+        }
+        #header ul #line{
+            position: absolute;
+            bottom: 0px;
+            width:100px;
+            height:0px;
+            border: solid 1px #ffd33a;
+            border-radius:10px;
+            left:-70px;
+            opacity: 0;
+            transition: all .3s ease-in-out;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="header">
+    <div class="left">
+        <img id="img-header" src="logo.png" alt="honey srl" />
+    </div>
+    <div class="right">
+        <ul id="menu" onmouseleave="moveLine('esc')">
+            <span id="line"></span>
+            <li><a href="#" class="li-menu" onmouseover="moveLine(1)">Chi siamo</a></li>
+            <li><a href="#" class="li-menu" onmouseover="moveLine(2)">Servizi</a></li>
+            <li><a href="#" class="li-menu" onmouseover="moveLine(3)">Assistenza</a></li>
+            <li><a href="#" class="li-menu" onmouseover="moveLine(4)">Contatti</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div style="height:4000px"></div>
+
+<script type="text/javascript">
+
+    window.onscroll = function(){ /*ogni volta che scrolli esegui questa funzione*/
+        fixedMenu();
+    }
+
+    var controllo = 0;
+
+    function fixedMenu(){
+        //console.log('SCROLL'); x provare
+        var header = document.getElementById('header');
+        var logo = document.getElementById('img-header');
+        var menu = document.getElementById('menu');
+        //console.log(window.pageYOffset);
+        if(window.pageYOffset > 100){ //
+            if(controllo == 0) {
+                header.style.height = "40px";
+                logo.style.width = "140px";
+                menu.style.margin = "0";
+                controllo = 1;
+            }
+        } else {
+            header.style.height = "80px";
+            logo.style.width = "250px";
+            menu.style.margin = ""; //perchè nel css di base non ha margin
+            controllo = 0;
+        }
+
+    }
+
+    function moveLine(position){
+        var line = document.getElementById('line');
+        if(position == 1){
+            line.style.transform = "translateX(130px)";
+            line.style.opacity = "1";
+        }else if(position == 2){
+            line.style.transform = "translateX(275px)";
+            line.style.opacity = "1";
+        }else if(position == 3){
+            line.style.transform = "translateX(425px)";
+            line.style.opacity = "1";
+        }else if(position == 4){
+            line.style.transform = "translateX(562px)";
+            line.style.opacity = "1";
+        }else {
+            line.style.transform = "translateX(0px)";
+            line.style.opacity = "0";
+        }
+    }
+</script>
+
+</body>
+</html>
